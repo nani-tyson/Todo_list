@@ -1,0 +1,249 @@
+/* CSS Variables */
+:root {
+    --primary-gradient: linear-gradient(45deg, #6a11cb, #2575fc);
+    --secondary-gradient: linear-gradient(90deg, #f9f9f9, #eaeaea);
+    --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    --radius: 15px;
+    --text-color: #2d3748;
+    --background: linear-gradient(135deg, #e9ecef, #d3e3fc);
+    --dark-background: linear-gradient(135deg, #1a1a1a, #2d2d2d);
+    --dark-text-color: #ffffff;
+    --dark-todo-bg: linear-gradient(90deg, #333333, #444444);
+}
+
+/* Base Styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    background: var(--background);
+    margin: 0;
+    padding: 30px;
+    min-height: 100vh;
+    color: var(--text-color);
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+body.dark-mode {
+    background: var(--dark-background);
+    color: var(--dark-text-color);
+}
+
+/* Heading */
+h1 {
+    text-align: center;
+    font-size: 3rem;
+    background: var(--primary-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 40px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 800;
+    animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Input Container */
+.input-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.input-container > input {
+    width: 360px;
+    height: 50px;
+    font-size: 1.1rem;
+    padding: 0 20px;
+    border: 2px solid transparent;
+    border-radius: var(--radius);
+    background-color: #ffffff;
+    box-shadow: var(--shadow);
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.input-container > input::placeholder {
+    color: #a0aec0;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.input-container > input:focus::placeholder {
+    transform: translateY(-20px);
+    opacity: 0;
+}
+
+.input-container > input:focus {
+    border-color: #6a11cb;
+    box-shadow: 0 6px 16px rgba(106, 17, 203, 0.2);
+}
+
+/* Add Button */
+.input-container > button {
+    height: 50px;
+    width: 50px;
+    font-size: 1.75rem;
+    border-radius: 50%;
+    background: var(--primary-gradient);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 10px rgba(106, 17, 203, 0.3);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.input-container > button::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    transform: scale(0);
+    transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+.input-container > button:hover::after {
+    transform: scale(2);
+    opacity: 0;
+}
+
+.input-container > button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 14px rgba(106, 17, 203, 0.4);
+}
+
+/* To-Do Items */
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 40px;
+}
+
+.todo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 25px;
+    width: 540px;
+    background: var(--secondary-gradient);
+    border-radius: var(--radius);
+    margin-bottom: 20px;
+    box-shadow: var(--shadow);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    animation: slideIn 0.5s ease-in-out;
+}
+
+@keyframes slideIn {
+    from { opacity: 0; transform: translateX(-20px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+.todo:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
+}
+
+/* Actions Section */
+.actions {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.actions > button {
+    background: linear-gradient(45deg, #ff4757, #ff7675);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    padding: 8px 16px;
+    cursor: pointer;
+    box-shadow: 0 3px 8px rgba(255, 71, 87, 0.3);
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.actions > button:hover {
+    background: linear-gradient(45deg, #e84118, #ff6b6b);
+    transform: translateY(-2px);
+}
+
+.actions > input[type="checkbox"] {
+    width: 22px;
+    height: 22px;
+    accent-color: #55efc4;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+/* Dark Mode Styles */
+body.dark-mode .todo {
+    background: var(--dark-todo-bg);
+    color: var(--dark-text-color);
+}
+
+body.dark-mode .input-container > input {
+    background-color: #444444;
+    color: var(--dark-text-color);
+}
+
+body.dark-mode .input-container > input::placeholder {
+    color: #a0aec0;
+}
+
+/* Progress Bar */
+.progress-bar {
+    width: 100%;
+    height: 8px;
+    background: #e0e0e0;
+    border-radius: 10px;
+    margin-top: 20px;
+    overflow: hidden;
+}
+
+.progress {
+    height: 100%;
+    background: var(--primary-gradient);
+    width: 0;
+    transition: width 0.5s ease;
+}
+
+/* Confetti Animation */
+@keyframes confetti {
+    0% { transform: translateY(0) rotate(0); opacity: 1; }
+    100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+}
+
+.confetti {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: #ff6b6b;
+    border-radius: 50%;
+    animation: confetti 1s ease-out;
+}
+
+/* Dark Mode Toggle */
+.toggle-dark-mode {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: var(--primary-gradient);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
